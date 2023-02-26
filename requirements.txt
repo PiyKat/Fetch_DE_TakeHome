@@ -1,1 +1,3 @@
 awscli-local
+psycopg
+pycryptodome
