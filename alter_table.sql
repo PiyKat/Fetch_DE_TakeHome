@@ -1,0 +1,1 @@
+ALTER TABLE user_logins ALTER COLUMN app_version TYPE varchar(32);

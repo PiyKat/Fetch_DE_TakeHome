@@ -1,6 +1,6 @@
 from Crypto.Random import get_random_bytes
 from Crypto import Random
-import AESCipher
+from AESCipher import AESCipher
 
 class PIIMasking:
 

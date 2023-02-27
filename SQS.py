@@ -2,6 +2,7 @@
 import boto3
 import json
 
+'''
 # Create SQS client
 AWS_REGION = "us-east-1"
 endpoint_url = "http://localhost:4566/000000000000/"
@@ -9,7 +10,7 @@ queue_name = "login-queue"
 max_no_messages = 10
 ACCESS_KEY = "dummy_access_key"
 SECRET_KEY = "dummy_secret_key"
-
+'''
 
 class SQS:
 
@@ -57,9 +58,11 @@ class SQS:
 
         return messages
 
+'''
 if __name__ == "__main__":
 
     sqs_obj = SQS(endpoint_url,queue_name,max_no_messages)
     messages = sqs_obj.return_messages()
     for message in messages:
         print(message)
+'''

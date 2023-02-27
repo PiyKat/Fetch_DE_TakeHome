@@ -1,3 +1,5 @@
 ./venv/
-./.DS_Store/
+.DS_Store
 aws_config.sh
+create_table.sql
+__pycache__/
