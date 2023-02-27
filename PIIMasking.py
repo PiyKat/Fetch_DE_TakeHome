@@ -45,7 +45,7 @@ class PIIMasking:
                 cipherDict[col] = AESCipher(self.generate_random_key())
 
         #### Dump the pickle file with the updated ciphers
-        pickle.dump(cipherDict,"ciphers.pkl")
+        pickle.dump(cipherDict,open("ciphers.pkl","wb"))
 
         return cipherDict
 
