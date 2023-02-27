@@ -30,7 +30,7 @@ class PIIMasking:
         if os.path.exists("ciphers.pkl"):
             #### If ciphers already exist, load it up so that we do not generate new key for an
             #### already encyprted attribute
-            cipherDict = pickle.load("ciphers.pkl")
+            cipherDict = pickle.load(open("ciphers.pkl","rb"))
             print("Loaded previously created ciphers !!!!!!")
         else:
             #### Create a new dictionary
