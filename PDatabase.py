@@ -1,8 +1,9 @@
 import base64
 import psycopg
 from datetime import datetime
+import sys
 
-class writeToDatabase:
+class PDatabase:
 
     def __init__(self, username, pwd, host):  # ,db):
         self.__username = username

@@ -23,9 +23,3 @@ class AESCipher(object):
     @staticmethod
     def _unpad(s):
         return s[:-ord(s[len(s)-1:])]
-
-'''
-if __name__ == "__main__":
-    cipher_obj = AESCipher(get_random_bytes(16))
-    print(cipher_obj.encrypt("ABC"))
-'''

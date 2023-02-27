@@ -33,7 +33,7 @@ class PIIMasking:
 
             for col in self.masking_cols:
                 try:
-                    message[col] = cipherDict[col].encrypt(message[col])
+                    message[col] = self.cipherDict[col].encrypt(message[col])
                 except KeyError:
                     continue
 

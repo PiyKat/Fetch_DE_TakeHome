@@ -13,15 +13,14 @@ SECRET_KEY = "dummy_secret_key"
 
 class SQS:
 
-    def __init__(self, endpoint, queue_name, max_messages):
-        self.endpoint = endpoint
-        self.queue_name = queue_name
-        self.max_messages = max_messages
-        self.sqs = boto3.client('sqs', region_name=AWS_REGION, endpoint_url=endpoint_url,
-                                aws_access_key_id=ACCESS_KEY,aws_secret_access_key=SECRET_KEY)
+    def __init__(self, endpoint, queue_name, max_messages,aws_region,aws_access_key, aws_secret_key):
+        self.__queue_url = endpoint + queue_name
+        self.__max_messages = max_messages
+        self.sqs = boto3.client('sqs', region_name=aws_region, endpoint_url=endpoint,
+                                aws_access_key_id=aws_access_key,aws_secret_access_key=aws_secret_key)
 
     def __return_message_batch(self):
-        return self.sqs.receive_message(QueueUrl=self.endpoint + self.queue_name, MaxNumberOfMessages=max_no_messages)
+        return self.sqs.receive_message(QueueUrl=self.__queue_url, MaxNumberOfMessages=self.__max_messages)
 
     def return_messages(self):
         '''
@@ -50,7 +49,7 @@ class SQS:
                 for msg in response['Messages']
             ]
 
-            resp = self.sqs.delete_message_batch(QueueUrl=endpoint_url + queue_name,
+            resp = self.sqs.delete_message_batch(QueueUrl=self.__queue_url,
                                                  Entries=entries)  # aws_access_key_id=ACCESS_KEY,aws_secret_access_key=SECRET_KEY
 
             if len(resp['Successful']) != len(entries):
