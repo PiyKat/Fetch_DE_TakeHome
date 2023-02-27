@@ -4,12 +4,14 @@ pip-install:
 
 .PHONY: docker
 docker-start:
-	docker-compose up
+	docker-compose up -d
+docker-stop:
+	docker-compose down --remove-orphans
 
 .PHONY: postgres
-	export PGPASSWORD=postgres
+alter-table:
 	psql -d postgres -U postgres -p 5432 -h localhost -f ./scripts/alter_table.sql
 
 .PHONY: python
-run-code:
+run:
 	python run.py
