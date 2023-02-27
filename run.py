@@ -3,6 +3,11 @@ from PIIMasking import PIIMasking
 from PDatabase import PDatabase
 import configparser
 
+'''
+volumes:
+        - ./scripts/alter_table.sql:/docker-entrypoint-initdb.d/alter_table.sql
+'''
+
 if __name__ == "__main__":
 
     #### Load all the configs and sh file here #####

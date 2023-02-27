@@ -7,7 +7,8 @@ docker-start:
 	docker-compose up
 
 .PHONY: postgres
-	psql -d postgres -U postgres -p 5432 -h localhost -f alter_table.sql
+	export PGPASSWORD=postgres
+	psql -d postgres -U postgres -p 5432 -h localhost -f ./scripts/alter_table.sql
 
 .PHONY: python
 run-code:

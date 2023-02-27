@@ -44,7 +44,7 @@ class PDatabase:
 
             # Convert dictionary values to list
             values = list(message.values())
-            print(message)
+
             # Execute the insert query
             cursor.execute("INSERT INTO user_logins ( \
                 user_id, \
@@ -59,5 +59,6 @@ class PDatabase:
             # Commit data to Postgres
             postgres_connection.commit()
 
+        print("All rows written in the postgres file")
         # Close connection to Postgres
         postgres_connection.close()

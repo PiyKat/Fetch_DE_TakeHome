@@ -2,16 +2,6 @@
 import boto3
 import json
 
-'''
-# Create SQS client
-AWS_REGION = "us-east-1"
-endpoint_url = "http://localhost:4566/000000000000/"
-queue_name = "login-queue"
-max_no_messages = 10
-ACCESS_KEY = "dummy_access_key"
-SECRET_KEY = "dummy_secret_key"
-'''
-
 class SQS:
 
     def __init__(self, endpoint, queue_name, max_messages,aws_region,aws_access_key, aws_secret_key):
@@ -27,7 +17,6 @@ class SQS:
         '''
         Function to return a list containing the information present in the "Body" attribute of the sqs response
         '''
-
         messages = []
 
         while True:
@@ -39,10 +28,13 @@ class SQS:
             try:
                 ### We extract the "Body" attribute from each json object
                 for message in response['Messages']:
-                    messages.append(json.loads(message["Body"]))
+                    data = json.loads(message["Body"])
+                    if 'user_id' in data:
+                        messages.append(data)
+
             except KeyError:
                 #### If we encounter a keyError, it means there is no "body" in message which
-                #### means there are no more meassages present in the queue, so we can stop the queue
+                #### means there are no more messages present in the queue, so we can stop the queue
                 break
 
             entries = [
@@ -51,18 +43,9 @@ class SQS:
             ]
 
             resp = self.sqs.delete_message_batch(QueueUrl=self.__queue_url,
-                                                 Entries=entries)  # aws_access_key_id=ACCESS_KEY,aws_secret_access_key=SECRET_KEY
+                                                 Entries=entries)
 
             if len(resp['Successful']) != len(entries):
                 raise RuntimeError(f"Failed to delete messages: entries={entries!r} resp={resp!r}")
 
         return messages
-
-'''
-if __name__ == "__main__":
-
-    sqs_obj = SQS(endpoint_url,queue_name,max_no_messages)
-    messages = sqs_obj.return_messages()
-    for message in messages:
-        print(message)
-'''
